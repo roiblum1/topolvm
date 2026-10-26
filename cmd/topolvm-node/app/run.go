@@ -120,7 +120,8 @@ func subMain(ctx context.Context) error {
 	}
 
 	if err := controller.SetupLogicalVolumeReconcilerWithServices(
-		mgr, client, nodename, vgService, lvService); err != nil {
+		mgr, client, nodename, vgService, lvService,
+		controller.WithLVMOperationTimeout(config.lvmOperationTimeout)); err != nil {
 		setupLog.Error(err, "unable to create controller", "controller", "LogicalVolume")
 		return err
 	}
